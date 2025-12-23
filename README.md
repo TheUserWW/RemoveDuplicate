@@ -1,6 +1,7 @@
 # RemoveDuplicate - Duplicate File Finder and Remover
 
 ## Overview
+<img width="589" height="450" alt="image" src="https://github.com/user-attachments/assets/4aa55dd2-bfb1-4cab-a2d7-1b5ca2b4fa55" />
 
 RemoveDuplicate is a Windows application designed to help users find and remove duplicate files within folders. It uses MD5 hashing to identify identical files and provides a user-friendly interface to manage and delete duplicates while keeping one copy of each file.
 
@@ -66,6 +67,7 @@ RemoveDuplicate is a Windows application designed to help users find and remove 
 - One copy of each file will be preserved
 
 ### Filtering Options - Detailed Guide
+<img width="395" height="391" alt="image" src="https://github.com/user-attachments/assets/ca7ff7a8-d913-4c04-8e56-7ecbffe2aebe" />
 
 The filtering system allows you to narrow down which duplicate files are displayed and managed. Filters can be accessed through the **Filter** menu or filter settings dialog.
 
