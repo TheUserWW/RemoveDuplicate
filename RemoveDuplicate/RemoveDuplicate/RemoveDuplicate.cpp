@@ -71,13 +71,13 @@ void InitListView() {
     // 第一列：文件名
     lvc.fmt = LVCFMT_LEFT;
     lvc.cx = 400;
-    lvc.pszText = (LPWSTR)L"文件名";
+    lvc.pszText = (LPWSTR)L"File Name";
     lvc.iSubItem = 0;
     ListView_InsertColumn(g_hListView, 0, &lvc);
 
     // 第二列：路径
     lvc.cx = 300;
-    lvc.pszText = (LPWSTR)L"路径";
+    lvc.pszText = (LPWSTR)L"Path";
     lvc.iSubItem = 1;
     ListView_InsertColumn(g_hListView, 1, &lvc);
 }
@@ -285,7 +285,7 @@ void ResetFilters() {
     criteria.pathFilter = g_pathFilter;
 
     
-    MessageBox(g_hwnd, L"已重置所有过滤器", L"提示", MB_OK | MB_ICONINFORMATION);
+    MessageBox(g_hwnd, L"All filters have been reset", L"Info", MB_OK | MB_ICONINFORMATION);
 
     // 重新显示所有重复文件
     if (!g_duplicateFiles.empty()) {
@@ -328,7 +328,7 @@ void ResetFilters() {
             }
         }
 
-        UpdateStatus(L"已显示所有重复文件");
+        UpdateStatus(L"Showing all duplicate files");
     }
 }
 
@@ -367,7 +367,7 @@ void ShowFilterSettingsDialog() {
 
 void ApplyFilters() {
     if (g_duplicateFiles.empty()) {
-        MessageBox(g_hwnd, L"没有可过滤的文件，请先扫描文件夹", L"提示", MB_OK | MB_ICONINFORMATION);
+        MessageBox(g_hwnd, L"No files to filter, please scan folder first", L"Info", MB_OK | MB_ICONINFORMATION);
         return;
     }
 
@@ -441,7 +441,7 @@ void ApplyFilters() {
         }
     }
 
-    std::wstring status = L"过滤完成，共显示 " + std::to_wstring(totalFiles) + L" 个文件";
+    std::wstring status = L"Filter complete, showing " + std::to_wstring(totalFiles) + L" files";
     UpdateStatus(status);
 }
 
@@ -572,7 +572,7 @@ void FindAllFiles(const std::wstring& folder, std::vector<std::wstring>& files) 
 // 扫描重复文件
 void ScanDuplicates() {
     if (g_selectedFolder.empty()) {
-        MessageBox(g_hwnd, LoadStringResource(IDS_SELECT_FOLDER_FIRST).c_str(), L"提示", MB_OK | MB_ICONINFORMATION);
+        MessageBox(g_hwnd, LoadStringResource(IDS_SELECT_FOLDER_FIRST).c_str(), L"Info", MB_OK | MB_ICONINFORMATION);
         return;
     }
 
@@ -632,7 +632,7 @@ void ScanDuplicates() {
             lvi.mask = LVIF_TEXT;
             lvi.iItem = ListView_GetItemCount(g_hListView);
 
-            std::wstring groupText = L"重复组 (" + std::to_wstring(group.second.size()) + L" 个文件)";
+            std::wstring groupText = L"Duplicate Group (" + std::to_wstring(group.second.size()) + L" files)";
             lvi.pszText = (LPWSTR)groupText.c_str();
             int groupIndex = ListView_InsertItem(g_hListView, &lvi);
 
@@ -685,7 +685,7 @@ void ScanDuplicates() {
     }
     else {
         std::wstring status = LoadStringResource(IDS_FOUND_DUPLICATES) + L" " + std::to_wstring(g_duplicateFiles.size()) +
-            L" 组重复文件";
+            L" duplicate groups";
         UpdateStatus(status);
 
         EnableWindow(g_hBtnDelete, TRUE);
@@ -697,19 +697,19 @@ void ScanDuplicates() {
 // 删除重复文件
 void DeleteDuplicates() {
     if (g_duplicateFiles.empty()) {
-        MessageBox(g_hwnd, LoadStringResource(IDS_NO_DUPLICATES_TO_DELETE).c_str(), L"提示", MB_OK | MB_ICONINFORMATION);
+        MessageBox(g_hwnd, LoadStringResource(IDS_NO_DUPLICATES_TO_DELETE).c_str(), L"Info", MB_OK | MB_ICONINFORMATION);
         return;
     }
 
     // 检查是否有勾选的组
     if (g_checkedGroups.empty()) {
-        MessageBox(g_hwnd, L"没有勾选任何重复组", L"提示", MB_OK | MB_ICONINFORMATION);
+        MessageBox(g_hwnd, L"No duplicate groups selected", L"Info", MB_OK | MB_ICONINFORMATION);
         return;
     }
 
     int confirm = MessageBox(g_hwnd,
         LoadStringResource(IDS_CONFIRM_DELETE).c_str(),
-        L"确认删除",
+        L"Confirm Delete",
         MB_YESNO | MB_ICONQUESTION);
 
     if (confirm != IDYES) {
@@ -815,39 +815,27 @@ void OpenFile(const std::wstring& filepath) {
     sei.nShow = SW_SHOW;
 
     if (!ShellExecuteExW(&sei)) {
-        MessageBox(g_hwnd, L"无法打开文件", L"错误", MB_OK | MB_ICONERROR);
+        MessageBox(g_hwnd, L"Cannot open file", L"Error", MB_OK | MB_ICONERROR);
     }
 }
 
 // 创建菜单
 void CreateMenu(HWND hwnd) {
     HMENU hMenu = CreateMenu();
-    HMENU hLanguageMenu = CreatePopupMenu();
     HMENU hFilterMenu = CreatePopupMenu();
 
-    // 添加联合国六种语言选项
-    AppendMenuW(hLanguageMenu, MF_STRING, ID_MENU_LANG_CHINESE, LoadStringResource(IDS_LANG_CHINESE).c_str());
-    AppendMenuW(hLanguageMenu, MF_STRING, ID_MENU_LANG_ENGLISH, LoadStringResource(IDS_LANG_ENGLISH).c_str());
-    AppendMenuW(hLanguageMenu, MF_STRING, ID_MENU_LANG_FRENCH, LoadStringResource(IDS_LANG_FRENCH).c_str());
-    AppendMenuW(hLanguageMenu, MF_STRING, ID_MENU_LANG_RUSSIAN, LoadStringResource(IDS_LANG_RUSSIAN).c_str());
-    AppendMenuW(hLanguageMenu, MF_STRING, ID_MENU_LANG_ARABIC, LoadStringResource(IDS_LANG_ARABIC).c_str());
-    AppendMenuW(hLanguageMenu, MF_STRING, ID_MENU_LANG_SPANISH, LoadStringResource(IDS_LANG_SPANISH).c_str());
-
     // 添加过滤设置选项
-    AppendMenuW(hFilterMenu, MF_STRING, ID_MENU_FILTER_SETTINGS, L"过滤设置");
+    AppendMenuW(hFilterMenu, MF_STRING, ID_MENU_FILTER_SETTINGS, L"Filter Settings");
     AppendMenuW(hFilterMenu, MF_SEPARATOR, 0, NULL);
-    AppendMenuW(hFilterMenu, MF_STRING, ID_MENU_FILTER_RESET, L"重置过滤器");
-
-    // 添加"语言"菜单到主菜单
-    AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hLanguageMenu, LoadStringResource(IDS_LANGUAGE).c_str());
+    AppendMenuW(hFilterMenu, MF_STRING, ID_MENU_FILTER_RESET, L"Reset Filters");
 
     // 添加"过滤"菜单到主菜单
-    AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hFilterMenu, L"过滤");
+    AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hFilterMenu, L"Filter");
 
     // 添加"帮助"菜单到主菜单
     HMENU hHelpMenu = CreatePopupMenu();
-    AppendMenuW(hHelpMenu, MF_STRING, IDM_ABOUT, L"关于");
-    AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hHelpMenu, L"帮助");
+    AppendMenuW(hHelpMenu, MF_STRING, IDM_ABOUT, L"About");
+    AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hHelpMenu, L"Help");
 
     // 设置窗口菜单
     SetMenu(hwnd, hMenu);
@@ -896,14 +884,14 @@ void CreateControls(HWND hwnd) {
         hwnd, (HMENU)3, NULL, NULL);
 
     // 全选按钮（初始禁用）
-    g_hBtnSelectAll = CreateWindowW(L"BUTTON", L"全选",
+    g_hBtnSelectAll = CreateWindowW(L"BUTTON", L"Select All",
         WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | WS_DISABLED,
         CONTROL_MARGIN + BUTTON_WIDTH * 2 + 20, CONTROL_MARGIN + 35,
         BUTTON_WIDTH, BUTTON_HEIGHT,
         hwnd, (HMENU)4, NULL, NULL);
 
     // 取消全选按钮（初始禁用）
-    g_hBtnDeselectAll = CreateWindowW(L"BUTTON", L"取消全选",
+    g_hBtnDeselectAll = CreateWindowW(L"BUTTON", L"Deselect All",
         WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | WS_DISABLED,
         CONTROL_MARGIN + BUTTON_WIDTH * 3 + 30, CONTROL_MARGIN + 35,
         BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -993,24 +981,24 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
             DeselectAllGroups();
             break;
 
-        case ID_MENU_LANG_CHINESE: // 中文
-        case ID_MENU_LANG_ENGLISH: // 英语
-        case ID_MENU_LANG_FRENCH:  // 法语
-        case ID_MENU_LANG_RUSSIAN: // 俄语
-        case ID_MENU_LANG_ARABIC:  // 阿拉伯语
-        case ID_MENU_LANG_SPANISH: // 西班牙语
-            // 预留功能，暂时不实现
-            MessageBox(hwnd, LoadStringResource(IDS_LANGUAGE_NOT_IMPLEMENTED).c_str(), L"提示", MB_OK | MB_ICONINFORMATION);
+        case ID_MENU_FILTER_RESET:
+            ResetFilters();
             break;
 
-            // 过滤菜单处理
         case ID_MENU_FILTER_SETTINGS:
             ShowFilterSettingsDialog();
             break;
 
-        case ID_MENU_FILTER_RESET:
-            ResetFilters();
+        case IDM_ABOUT:
+        {
+            DialogBoxW(GetModuleHandle(NULL), MAKEINTRESOURCEW(IDD_ABOUTBOX), hwnd, [](HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) -> INT_PTR {
+                if (uMsg == WM_COMMAND && LOWORD(wParam) == IDOK) {
+                    EndDialog(hwnd, IDOK);
+                }
+                return FALSE;
+            });
             break;
+        }
         }
         break;
 
@@ -1079,6 +1067,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     wc.lpszClassName = CLASS_NAME;
     wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wc.hIcon = LoadIconW(hInstance, MAKEINTRESOURCEW(IDI_REMOVEDUPLICATE));
 
     RegisterClass(&wc);
 
@@ -1099,6 +1088,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     if (g_hwnd == NULL) {
         return 0;
     }
+
+    // 设置窗口图标（大图标和小图标）
+    HICON hIconLarge = LoadIconW(hInstance, MAKEINTRESOURCEW(IDI_REMOVEDUPLICATE));
+    HICON hIconSmall = LoadIconW(hInstance, MAKEINTRESOURCEW(IDI_SMALL));
+    SendMessageW(g_hwnd, WM_SETICON, ICON_BIG, (LPARAM)hIconLarge);
+    SendMessageW(g_hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIconSmall);
 
     // 加载过滤设置
     FilterCriteria criteria;
