@@ -1,0 +1,193 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// 字符串表
+//
+
+STRINGTABLE
+BEGIN
+   IDC_REMOVEDUPLICATE   "REMOVEDUPLICATE"
+   IDS_APP_TITLE       "RemoveDuplicate"
+   IDS_FOLDER_PATH     "Folder Path:"
+   IDS_BROWSE          "Browse..."
+   IDS_SCAN_DUPLICATES "Scan for Duplicate Files"
+   IDS_DELETE_DUPLICATES "Delete Duplicate Files"
+   IDS_READY           "Ready"
+   IDS_SELECT_FOLDER   "Folder Selected"
+   IDS_NO_FILES_FOUND  "No files found"
+   IDS_SCANNING_FILES  "Scanning files..."
+   IDS_CALCULATING_HASH "Calculating file hashes..."
+   IDS_PROCESSING_FILE "Processing file:"
+   IDS_NO_DUPLICATES_FOUND "No duplicate files found"
+   IDS_FOUND_DUPLICATES "Found"
+   IDS_DELETING_FILES  "Deleting duplicate files..."
+   IDS_DELETE_COMPLETE "Deletion complete. Successfully:"
+   IDS_DELETED         " files, Failed:"
+   IDS_DELETE_FAILED   " files"
+   IDS_NO_DUPLICATES_TO_DELETE "No duplicate files to delete"
+   IDS_CONFIRM_DELETE  "Are you sure you want to delete all duplicate files?\n(The first file in each duplicate group will be kept, others will be moved to Recycle Bin)"
+   IDS_SELECT_FOLDER_FIRST "Please select a folder first"
+   IDS_LANGUAGE        "Language"
+   IDS_LANGUAGE_NOT_IMPLEMENTED "Language feature not implemented"
+   IDS_WINDOW_TITLE    "RemoveDuplicate"
+   IDS_ABOUT_TITLE     "About RemoveDuplicate"
+   IDS_VERSION         "RemoveDuplicate, Version 1.0"
+   IDS_COPYRIGHT       "Copyright (c) 2025"
+   IDS_OK              "OK"
+   IDS_FILE            "File(&F)"
+   IDS_HELP            "Help(&H)"
+   IDS_EXIT            "Exit(&X)"
+   IDS_ABOUT           "About(&A) ..."
+   IDS_LANG_CHINESE    "Chinese"
+   IDS_LANG_ENGLISH    "English"
+   IDS_LANG_FRENCH     "French"
+   IDS_LANG_RUSSIAN    "Russian"
+   IDS_LANG_ARABIC     "Arabic"
+   IDS_LANG_SPANISH    "Spanish"
+   IDS_COLUMN_FILE     "File Name"
+   IDS_COLUMN_PATH     "Path"
+   IDS_GROUP_HEADER    "Duplicate Group"
+   IDS_DUPLICATE_GROUP "Duplicate Group (%d files): %s"
+   IDC_STATIC_CAPTION  "Duplicate Files"
+   IDC_LIST_DUPLICATES "Duplicate Files List"
+   IDM_SELECT_ALL      "Select All"
+   IDM_DESELECT_ALL    "Deselect All"
+   IDC_STATIC_FOLDER   "Folder:"
+   IDC_BTN_BROWSE      "Browse"
+   IDC_BTN_SCAN        "Scan"
+   IDC_BTN_DELETE      "Delete"
+   IDC_BTN_SELECT_ALL  "Select All"
+   IDC_BTN_DESELECT_ALL "Deselect All"
+   IDM_FILTER_SETTINGS "Filter Settings"
+   IDM_RESET_FILTERS   "Reset Filters"
+
+   // 新增通用字符串
+   IDS_FILES           "files"
+   IDS_FILTER_COMPLETE "Filtering complete, showing %d files"
+   IDS_NO_GROUPS_SELECTED "No groups selected"
+   IDS_CONFIRM_DELETE_TITLE "Confirm Delete"
+   IDS_SHOWING_ALL_FILES "Showing all files"
+   IDS_FILTERS_RESET   "All filters have been reset"
+   IDS_NO_FILES_TO_FILTER "No files to filter, please scan folder first"
+
+   // Filter dialog strings
+   IDS_GROUPBOX_SIZE   "File Size"
+   IDS_STATIC_MIN      "Min:"
+   IDS_STATIC_MAX      "Max:"
+   IDS_GROUPBOX_TYPE   "File Type"
+   IDS_GROUPBOX_DATE   "Modified Date"
+   IDS_STATIC_FROM     "From:"
+   IDS_STATIC_TO       "To:"
+   IDS_GROUPBOX_PATH   "File Path"
+   IDS_BTN_RESET       "Reset"
+   IDS_BTN_APPLY       "Apply"
+
+   // 新增通用字符串
+   IDS_FILES           "files"
+   IDS_FILTER_COMPLETE "Filter completed. Displaying"
+   IDS_NO_GROUPS_SELECTED "No duplicate groups selected"
+   IDS_CONFIRM_DELETE_TITLE "Confirm Delete"
+   IDS_SHOWING_ALL_FILES "Showing all duplicate files"
+   IDS_FILTERS_RESET   "All filters have been reset"
+   IDS_NO_FILES_TO_FILTER "No files to filter. Please scan a folder first"
+
+   // Filter dialog string resources
+   IDS_FILTER_DIALOG_TITLE "Filter Settings"
+   IDS_CHECK_SIZE_TEXT "Enable file size filter"
+   IDS_CHECK_TYPE_TEXT "Enable file type filter"
+   IDS_CHECK_DATE_TEXT "Enable date filter"
+   IDS_CHECK_PATH_TEXT "Enable path filter"
+   IDS_STATIC_MIN_TEXT "Min:"
+   IDS_STATIC_MAX_TEXT "Max:"
+   IDS_STATIC_FROM_TEXT "From:"
+   IDS_STATIC_TO_TEXT   "To:"
+   IDS_GROUPBOX_SIZE_TEXT "File Size"
+   IDS_GROUPBOX_TYPE_TEXT "File Type"
+   IDS_GROUPBOX_DATE_TEXT "Modified Date"
+   IDS_GROUPBOX_PATH_TEXT "File Path"
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// 菜单
+//
+
+IDC_REMOVEDUPLICATE MENU
+BEGIN
+    POPUP "File(&F)"
+    BEGIN
+        MENUITEM "Exit(&X)",                IDM_EXIT
+    END
+    POPUP "Help(&H)"
+    BEGIN
+        MENUITEM "About(&A) ...",           IDM_ABOUT
+    END
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// 快捷键
+//
+
+IDC_REMOVEDUPLICATE ACCELERATORS
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// 对话框
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 400, 300
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About RemoveDuplicate"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    ICON            IDI_REMOVEDUPLICATE,IDC_STATIC,14,14,21,20
+    LTEXT           "RemoveDuplicate, Version 1.0",IDC_STATIC,42,14,200,8,SS_NOPREFIX
+    LTEXT           "Copyright (c) 2025",IDC_STATIC,42,26,200,8
+    LTEXT           "License Information:",IDC_STATIC,14,45,150,8
+    EDITTEXT        IDC_EDIT_LICENSE,14,60,370,180,ES_MULTILINE | ES_READONLY | ES_AUTOVSCROLL | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,300,250,50,14,WS_GROUP
+END
+
+IDD_FILTER_DIALOG DIALOGEX 0, 0, 300, 280
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Filter Settings"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "File Size",IDC_STATIC,10,10,280,60
+    CONTROL         "Enable file size filter",IDC_CHECK_SIZE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,20,120,10
+    LTEXT           "Min:",IDC_STATIC,20,35,30,10
+    EDITTEXT        IDC_EDIT_MIN_SIZE,55,33,80,12,ES_AUTOHSCROLL
+    LTEXT           "Max:",IDC_STATIC,145,35,30,10
+    EDITTEXT        IDC_EDIT_MAX_SIZE,180,33,80,12,ES_AUTOHSCROLL
+    
+    GROUPBOX        "File Type",IDC_STATIC,10,80,280,40
+    CONTROL         "Enable file type filter",IDC_CHECK_TYPE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,90,120,10
+    EDITTEXT        IDC_EDIT_TYPE,20,105,260,12,ES_AUTOHSCROLL
+    
+    GROUPBOX        "Modified Date",IDC_STATIC,10,130,280,60
+    CONTROL         "Enable date filter",IDC_CHECK_DATE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,140,120,10
+    LTEXT           "From:",IDC_STATIC,20,155,30,10
+    EDITTEXT        IDC_EDIT_DATE_FROM,55,153,80,12,ES_AUTOHSCROLL
+    LTEXT           "To:",IDC_STATIC,145,155,30,10
+    EDITTEXT        IDC_EDIT_DATE_TO,180,153,80,12,ES_AUTOHSCROLL
+    
+    GROUPBOX        "File Path",IDC_STATIC,10,200,280,40
+    CONTROL         "Enable path filter",IDC_CHECK_PATH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,210,120,10
+    EDITTEXT        IDC_EDIT_PATH,20,225,260,12,ES_AUTOHSCROLL
+    
+    DEFPUSHBUTTON   "OK",IDOK,180,250,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,240,250,50,14
+END
+
+#endif    // !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
